@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import { type NextPage } from "next";
 import Head from "next/head";
 import { Strategy } from "~/utils/tabnews";
@@ -37,7 +38,9 @@ const Home: NextPage = () => {
                     className="rounded bg-blue-500 px-4 py-2 text-white transition-all duration-300 hover:bg-blue-600"
                     onClick={() => postsQuery.fetchNextPage()}
                 >
-                    {postsQuery.isFetchingNextPage ? "Loading..." : "Load next page"}
+                    {postsQuery.isFetchingNextPage
+                        ? "Loading..."
+                        : "Load next page"}
                 </button>
             </main>
         </>
