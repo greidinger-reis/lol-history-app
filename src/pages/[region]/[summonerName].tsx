@@ -205,7 +205,9 @@ export function SeasonInfo({
     seasonInfo: RouterOutputs["season"]["getSummonerSeasonInfo"];
 }) {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const rankedSoloSeason = seasonInfo[0]!;
+    const rankedSoloSeason = seasonInfo[0];
+
+    if(!rankedSoloSeason) return null;
 
     return (
         <div>
