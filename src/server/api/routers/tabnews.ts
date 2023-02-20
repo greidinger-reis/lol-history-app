@@ -1,8 +1,13 @@
 import { z } from "zod";
-import { getPostPageUrl, Post, Strategy } from "~/utils/tabnews";
+import { getPostPageUrl, type Post, Strategy } from "~/utils/tabnews";
 import { createTRPCRouter, publicProcedure } from "../trpc";
 
 export const tabnewsRouter = createTRPCRouter({
+    list: publicProcedure.query(async () => {
+        return await fetch(getPostPageUrl(1, 10, Strategy.NEW)).then(
+            (res) => res.json() as Promise<Post[]>
+        );
+    }),
     listPosts: publicProcedure
         .input(
             z.object({

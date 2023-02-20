@@ -16,6 +16,7 @@ const Home: NextPage = () => {
             getNextPageParam: (prevPage) => prevPage.nextCursor,
         }
     );
+    const posts = api.tabnews.list.useQuery();
 
     return (
         <>
@@ -67,6 +68,13 @@ const Home: NextPage = () => {
                         ? "Loading..."
                         : "Load next page"}
                 </button>
+                <ul>
+                    {posts.data?.map((post) => (
+                        <li key={post.id}>
+                            {post.title} {post.owner_username}
+                        </li>
+                    ))}
+                </ul>
             </main>
         </>
     );
