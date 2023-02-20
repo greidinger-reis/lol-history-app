@@ -6,6 +6,7 @@ import { _Region } from "~/constants/regions";
 import { formatWhiteSpacesToUrl } from "~/utils/formatWhiteSpace";
 import { api } from "~/utils/api";
 import { Strategy } from "~/utils/tabnews";
+import champions from "public/data/champions.json";
 
 const Home: NextPage = () => {
     const [summonerName, setSummonerName] = useState("");
@@ -16,7 +17,6 @@ const Home: NextPage = () => {
             getNextPageParam: (prevPage) => prevPage.nextCursor,
         }
     );
-    const posts = api.tabnews.list.useQuery();
 
     return (
         <>
@@ -68,11 +68,14 @@ const Home: NextPage = () => {
                         ? "Loading..."
                         : "Load next page"}
                 </button>
+                
                 <ul>
-                    {posts.data?.map((post) => (
-                        <li key={post.id}>
-                            {post.title} {post.owner_username}
-                        </li>
+                    {Object.keys(champions).map((key) => (
+                        <div key={key}>
+                            {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment  */}
+                            {/* @ts-ignore */} {/* eslint-disable-next-line @typescript-eslint/no-unsafe-member-access */}
+                            {champions[key].name} {champions[key].title}
+                        </div>
                     ))}
                 </ul>
             </main>
