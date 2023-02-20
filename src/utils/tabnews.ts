@@ -1,3 +1,4 @@
+
 export const BASE_URL = "https://www.tabnews.com.br/api/v1"
 
 export enum Strategy {

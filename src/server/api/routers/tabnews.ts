@@ -1,16 +1,8 @@
 import { z } from "zod";
+import { getPostPageUrl, Post, Strategy } from "~/utils/tabnews";
+import { createTRPCRouter, publicProcedure } from "../trpc";
 
-import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
-import { getPostPageUrl, type Post, Strategy } from "~/utils/tabnews";
-
-export const exampleRouter = createTRPCRouter({
-    hello: publicProcedure
-        .input(z.object({ text: z.string() }))
-        .query(({ input }) => {
-            return {
-                greeting: `Hello ${input.text}`,
-            };
-        }),
+export const tabnewsRouter = createTRPCRouter({
     listPosts: publicProcedure
         .input(
             z.object({

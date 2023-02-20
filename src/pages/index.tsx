@@ -1,11 +1,16 @@
-/* eslint-disable @typescript-eslint/no-misused-promises */
 import { type NextPage } from "next";
 import Head from "next/head";
-import { Strategy } from "~/utils/tabnews";
+import Link from "next/link";
+import { useState } from "react";
+import { _Region } from "~/server/constants/regions";
+import { formatWhiteSpacesToUrl } from "~/server/utils/formatWhiteSpace";
 import { api } from "~/utils/api";
+import { Strategy } from "~/utils/tabnews";
 
 const Home: NextPage = () => {
-    const postsQuery = api.example.listPosts.useInfiniteQuery(
+    const [summonerName, setSummonerName] = useState("");
+    const [region, setRegion] = useState("na");
+    const postsQuery = api.tabnews.listPosts.useInfiniteQuery(
         { limit: 10, strategy: Strategy.NEW },
         {
             refetchOnMount: false,
@@ -23,6 +28,28 @@ const Home: NextPage = () => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <main>
+                <h1>Summoner Name</h1>
+                <input
+                    type="search"
+                    value={summonerName}
+                    onChange={(e) => setSummonerName(e.currentTarget.value)}
+                />
+                <h2>Region</h2>
+                <select
+                    value={region}
+                    onChange={(e) => setRegion(e.currentTarget.value)}
+                >
+                    {Object.keys(_Region).map((region) => (
+                        <option key={region} value={region}>
+                            {region.toUpperCase()}
+                        </option>
+                    ))}
+                </select>
+                <Link
+                    href={`/${region}/${formatWhiteSpacesToUrl(summonerName)}`}
+                >
+                    Search
+                </Link>
                 <ul>
                     {postsQuery.data?.pages.map((page) =>
                         page.posts.map((post) => (
@@ -36,6 +63,7 @@ const Home: NextPage = () => {
                 </ul>
                 <button
                     className="rounded bg-blue-500 px-4 py-2 text-white transition-all duration-300 hover:bg-blue-600"
+                    /* eslint-disable-next-line @typescript-eslint/no-misused-promises */
                     onClick={() => postsQuery.fetchNextPage()}
                 >
                     {postsQuery.isFetchingNextPage
