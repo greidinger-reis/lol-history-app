@@ -43,6 +43,7 @@ export function MatchCard({
     const participant = match?.info?.participants.find(
         (participant) => participant.summonerId === summonerId
     );
+
     const queue = getQueueById(match?.info?.queueId ?? 0);
 
     const kdaRatio = Number(
@@ -85,9 +86,9 @@ export function MatchCard({
                 "border-error": !participant?.win,
             })}
         >
-            <div className="card-body flex-row items-center">
+            <div className="card-body justify-evenly flex-row items-center">
                 {/* left side */}
-                <div className="mx-1 min-w-max text-center text-xs text-base-content/50">
+                <div className="min-w-max text-center text-xs text-base-content/50">
                     <div>
                         <p
                             className={classNames("font-bold", {
@@ -140,7 +141,8 @@ export function MatchCard({
                         pentaKills={participant?.pentaKills}
                     />
                 </div>
-                <div className="flex items-center gap-1">
+                {/* middle */}
+                <div className="flex items-center gap-4">
                     {/*find the participant's champion*/}
                     <div className="flex gap-1">
                         <div
@@ -206,7 +208,7 @@ export function MatchCard({
                         </div>
                     </div>
                     {/*  KDA */}
-                    <div className="mx-1 min-w-max text-center text-xs text-base-content/50">
+                    <div className="min-w-max text-center text-xs text-base-content/50">
                         <p className="font-bold">
                             {participant?.kills} /{" "}
                             <span className="text-red-500">
@@ -256,7 +258,7 @@ export function MatchCard({
                         )}
                     </div>
                     {/* Items icons */}
-                    <div className="mx-1 grid grid-cols-4 gap-1">
+                    <div className="grid grid-cols-4 gap-1">
                         {[
                             participant?.item0,
                             participant?.item1,
@@ -297,8 +299,9 @@ export function MatchCard({
                     </div>
                     {/* CS + CS / Minute */}
                     <div className="min-w-max text-xs text-base-content/50"></div>
+
                     {/* Wards */}
-                    <div className="mx-1 flex flex-col gap-1">
+                    <div className="flex flex-col gap-1">
                         <div
                             className="tooltip flex cursor-help items-center gap-1"
                             data-tip="Control Wards Placed"
@@ -339,41 +342,41 @@ export function MatchCard({
                             {participant?.wardsKilled}
                         </div>
                     </div>
-
-                    {/* Game participants */}
-                    <div className="flex max-h-28 w-80 flex-col flex-wrap">
-                        {match?.info?.participants.map((participant) => (
+                </div>
+                {/* right-side */}
+                {/* Game participants */}
+                <div className="flex max-h-28 w-72 flex-col flex-wrap">
+                    {match?.info?.participants.map((participant) => (
+                        <div
+                            key={participant.summonerId}
+                            className="flex items-center gap-1"
+                        >
                             <div
-                                key={participant.summonerId}
-                                className="flex items-center gap-1"
+                                className="tooltip cursor-help"
+                                data-tip={participant.championName}
                             >
-                                <div
-                                    className="tooltip cursor-help"
-                                    data-tip={participant.championName}
-                                >
-                                    <Image
-                                        width={20}
-                                        height={20}
-                                        src={championAssetsUrl(
-                                            participant.championId ?? -1
-                                        )}
-                                        alt={participant.championName ?? ""}
-                                        className="rounded-full"
-                                    />
-                                </div>
-                                <Link
-                                    className="hover:text-base-content/50"
-                                    href={`/${router.asPath.split(
-                                        "/"
-                                    )[1]!}/${formatWhiteSpacesToUrl(
-                                        participant.summonerName
-                                    )}`}
-                                >
-                                    {participant.summonerName}
-                                </Link>
+                                <Image
+                                    width={20}
+                                    height={20}
+                                    src={championAssetsUrl(
+                                        participant.championId ?? -1
+                                    )}
+                                    alt={participant.championName ?? ""}
+                                    className="rounded-full"
+                                />
                             </div>
-                        ))}
-                    </div>
+                            <Link
+                                className="hover:underline text-base-content/70"
+                                href={`/${router.asPath.split(
+                                    "/"
+                                )[1]!}/${formatWhiteSpacesToUrl(
+                                    participant.summonerName
+                                )}`}
+                            >
+                                {participant.summonerName}
+                            </Link>
+                        </div>
+                    ))}
                 </div>
             </div>
         </li>

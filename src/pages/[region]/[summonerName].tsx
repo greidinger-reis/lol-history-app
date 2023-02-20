@@ -25,6 +25,8 @@ const paramsSchema = z.object({
     summonerName: z.string(),
 });
 
+const MATCH_LIMIT = 10;
+
 export const getServerSideProps = (async (ctx) => {
     const params = paramsSchema.safeParse(ctx.params);
 
@@ -51,7 +53,7 @@ export const getServerSideProps = (async (ctx) => {
     });
 
     const matchesList = ssg.matches.listInfinite.prefetchInfinite({
-        limit: 10,
+        limit: MATCH_LIMIT,
         puuid: summoner.puuid,
         region: parseMatchesRegion(region),
     });
@@ -80,7 +82,7 @@ export default function SummonerPage({
 
     const matchesQuery = api.matches.listInfinite.useInfiniteQuery(
         {
-            limit: 10,
+            limit: MATCH_LIMIT,
             puuid: summoner.puuid,
             region: parseMatchesRegion(region),
         },
@@ -104,7 +106,6 @@ export default function SummonerPage({
         }
     );
 
-    const updateCacheMutation = api.cache.update.useMutation();
     const cacheCreationDateQuery = api.matches.getLastCacheUpdatedDate.useQuery(
         {
             puuid: summoner.puuid,
@@ -112,8 +113,11 @@ export default function SummonerPage({
         {
             refetchOnMount: false,
             refetchOnWindowFocus: false,
+            staleTime: Infinity,
         }
     );
+
+    const updateCacheMutation = api.cache.update.useMutation();
 
     async function handleNextPage() {
         if (!matchesQuery.hasNextPage) return;
@@ -125,8 +129,10 @@ export default function SummonerPage({
         const updatePuuid = updateCacheMutation.mutateAsync({
             key: summoner.puuid,
         });
+        const updateId = updateCacheMutation.mutateAsync({
+            key: summoner.id,
+        });
 
-        const updateId = updateCacheMutation.mutateAsync({ key: summoner.id });
         await Promise.all([updatePuuid, updateId]);
 
         const refetchMatches = matchesQuery.refetch();
@@ -141,7 +147,11 @@ export default function SummonerPage({
     }
 
     useEffect(() => {
-        if (updateCacheMutation.isLoading) {
+        if (
+            updateCacheMutation.isLoading ||
+            seasonInfoQuery.isLoading ||
+            matchesQuery.isLoading
+        ) {
             nProgress.start();
             return;
         }
