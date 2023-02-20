@@ -1,7 +1,7 @@
 import { createTRPCRouter } from "./trpc";
-import { matchesRouter } from "./routers/matches";
-import { seasonRouter } from "./routers/season";
-import { cacheRouter } from "./routers/cache";
+// import { matchesRouter } from "./routers/matches";
+// import { seasonRouter } from "./routers/season";
+// import { cacheRouter } from "./routers/cache";
 import { tabnewsRouter } from "./routers/tabnews";
 
 /**
@@ -10,9 +10,9 @@ import { tabnewsRouter } from "./routers/tabnews";
  * All routers added in /api/routers should be manually added here
  */
 export const appRouter = createTRPCRouter({
-    matches: matchesRouter,
-    season: seasonRouter,
-    cache: cacheRouter,
+    // matches: matchesRouter,
+    // season: seasonRouter,
+    // cache: cacheRouter,
     tabnews:tabnewsRouter 
 });
 
