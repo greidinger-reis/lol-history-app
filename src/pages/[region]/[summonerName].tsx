@@ -156,7 +156,7 @@ export default function SummonerPage({
             return;
         }
         nProgress.done();
-    }, [updateCacheMutation.isLoading]);
+    }, [updateCacheMutation.isLoading, seasonInfoQuery.isLoading, matchesQuery.isLoading]);
 
     return (
         <>
