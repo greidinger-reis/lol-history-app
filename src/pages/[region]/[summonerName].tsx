@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment, @typescript-eslint/no-misused-promises, @typescript-eslint/no-floating-promises */
+/* eslint-disable @typescript-eslint/ban-ts-comment  */
 import type { InferGetServerSidePropsType, GetServerSideProps } from "next";
 import nProgress from "nprogress";
 import { useEffect } from "react";
@@ -115,19 +115,29 @@ export default function SummonerPage({
         }
     );
 
-    function handleNextPage() {
+    async function handleNextPage() {
         if (!matchesQuery.hasNextPage) return;
         console.log(matchesQuery.fetchNextPage);
-        matchesQuery.fetchNextPage();
+        await matchesQuery.fetchNextPage();
     }
 
     async function handleCacheUpdate() {
         const updatePuuid = updateCacheMutation.mutateAsync({
             key: summoner.puuid,
         });
+
         const updateId = updateCacheMutation.mutateAsync({ key: summoner.id });
         await Promise.all([updatePuuid, updateId]);
-        await matchesQuery.refetch();
+
+        const refetchMatches = matchesQuery.refetch();
+        const refetchSeasonInfo = seasonInfoQuery.refetch();
+        const refetchCacheCreation = cacheCreationDateQuery.refetch();
+
+        await Promise.all([
+            refetchMatches,
+            refetchSeasonInfo,
+            refetchCacheCreation,
+        ]);
     }
 
     useEffect(() => {
@@ -149,7 +159,7 @@ export default function SummonerPage({
                 <button
                     disabled={updateCacheMutation.isLoading}
                     className="btn-primary btn text-base-100"
-                    onClick={() => handleCacheUpdate()}
+                    onClick={() => void handleCacheUpdate()}
                 >
                     {updateCacheMutation.isLoading ? <Loading /> : "Update"}
                 </button>
@@ -182,7 +192,7 @@ export default function SummonerPage({
                 <button
                     disabled={matchesQuery.isFetchingNextPage}
                     className="btn-outline btn-primary btn w-full"
-                    onClick={handleNextPage}
+                    onClick={() => void handleNextPage()}
                 >
                     {matchesQuery.isFetchingNextPage ? (
                         <Loading />
@@ -203,7 +213,7 @@ export function SeasonInfo({
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const rankedSoloSeason = seasonInfo[0];
 
-    if(!rankedSoloSeason) return null;
+    if (!rankedSoloSeason) return null;
 
     return (
         <div>
@@ -227,4 +237,3 @@ export function SeasonInfo({
         </div>
     );
 }
-
