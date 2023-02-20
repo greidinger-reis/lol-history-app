@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment  */
+/* eslint-disable @typescript-eslint/ban-ts-comment, @typescript-eslint/no-misused-promises  */
 import type { InferGetServerSidePropsType, GetServerSideProps } from "next";
 import nProgress from "nprogress";
 import { useEffect } from "react";
@@ -159,7 +159,7 @@ export default function SummonerPage({
                 <button
                     disabled={updateCacheMutation.isLoading}
                     className="btn-primary btn text-base-100"
-                    onClick={() => void handleCacheUpdate()}
+                    onClick={() => handleCacheUpdate()}
                 >
                     {updateCacheMutation.isLoading ? <Loading /> : "Update"}
                 </button>
@@ -192,7 +192,7 @@ export default function SummonerPage({
                 <button
                     disabled={matchesQuery.isFetchingNextPage}
                     className="btn-outline btn-primary btn w-full"
-                    onClick={() => void handleNextPage()}
+                    onClick={() => handleNextPage()}
                 >
                     {matchesQuery.isFetchingNextPage ? (
                         <Loading />
