@@ -13,9 +13,6 @@ const Home: NextPage = () => {
     const postsQuery = api.tabnews.listPosts.useInfiniteQuery(
         { limit: 10, strategy: Strategy.NEW },
         {
-            refetchOnMount: false,
-            refetchOnWindowFocus: false,
-            staleTime: Infinity,
             getNextPageParam: (prevPage) => prevPage.nextCursor,
         }
     );
