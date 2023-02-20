@@ -1,6 +1,6 @@
-import { fetchSummonerSeasonInfo } from "../fetches/seasonInfo";
-import { type Region } from "../constants/regions";
-import { seasonInfoSchema, type SeasonInfo } from "../types/seasonInfo";
+import { fetchSummonerSeasonInfo } from "~/server/fetches/seasonInfo";
+import { type Region } from "~/constants/regions";
+import { seasonInfoSchema, type SeasonInfo } from "~/server/types/seasonInfo";
 
 type Params = {
     summonerId: string;

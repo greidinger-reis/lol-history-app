@@ -5,21 +5,21 @@ import {
     intervalToDuration,
 } from "date-fns";
 import Image from "next/image";
-import { getQueueById } from "~/server/utils/getQueueById";
-import { type RunePageDict } from "~/server/utils/runes/getRunes";
-import { type SummonerSpellDict } from "~/server/utils/summoner-spells/getSummonerSpells";
+import { getQueueById } from "~/utils/getQueueById";
+import { type RunePageDict } from "~/utils/runes/getRunes";
+import { type SummonerSpellDict } from "~/utils/summoner-spells/getSummonerSpells";
 import { type Style, type Match } from "~/models/Match";
-import { type ChampionDict } from "~/server/utils/champions/getChampionInfo";
-import { type ItemsDict } from "~/server/utils/items/getItemsInfo";
+import { type ChampionDict } from "~/utils/champions/getChampionInfo";
+import { type ItemsDict } from "~/utils/items/getItemsInfo";
 import {
     championAssetsUrl,
     itemAssetsUrl,
     runeAssetsUrl,
     spellsAssetsUrl,
-} from "~/server/constants/urls";
+} from "~/constants/urls";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { formatWhiteSpacesToUrl } from "~/server/utils/formatWhiteSpace";
+import { formatWhiteSpacesToUrl } from "~/utils/formatWhiteSpace";
 import classNames from "classnames";
 
 type Props = {

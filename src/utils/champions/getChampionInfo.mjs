@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 //@ts-check
-import LATEST_VERSION from "../../../../public/latest-version.mjs";
+import LATEST_VERSION from "../../../public/latest-version.mjs";
 
 export async function getChampionInfo() {
     console.log("Fetching champion info");

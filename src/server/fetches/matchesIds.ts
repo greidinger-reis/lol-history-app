@@ -1,5 +1,5 @@
 import { env } from "~/env.mjs";
-import type { MatchesRegion } from "../constants/regions";
+import type { MatchesRegion } from "~/constants/regions";
 
 type Params = {
     puuid: string;

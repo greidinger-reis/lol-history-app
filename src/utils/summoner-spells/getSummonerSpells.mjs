@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 //@ts-check
-import LATEST_VERSION from "../../../../public/latest-version.mjs";
+import LATEST_VERSION from "../../../public/latest-version.mjs";
 
 const fetchSummonerSpells = fetch(
     `http://ddragon.leagueoflegends.com/cdn/${LATEST_VERSION}/data/en_US/summoner.json`

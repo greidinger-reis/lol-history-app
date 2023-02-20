@@ -1,5 +1,5 @@
 //@ts-check
-import LATEST_VERSION from "../../../../public/latest-version.mjs";
+import LATEST_VERSION from "../../../public/latest-version.mjs";
 import { stripHTML } from "../stripHTML.mjs";
 
 const fetchRunes = fetch(

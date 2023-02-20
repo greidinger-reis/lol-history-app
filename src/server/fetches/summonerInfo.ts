@@ -1,7 +1,7 @@
 import { env } from "~/env.mjs";
-import { formatWhiteSpacesToUrl } from "../utils/formatWhiteSpace";
-import { parseRegion } from "../utils/parseRegion";
-import type { Region } from "../constants/regions";
+import { formatWhiteSpacesToUrl } from "~/utils/formatWhiteSpace";
+import { parseRegion } from "~/utils/parseRegion";
+import type { Region } from "~/constants/regions";
 
 type Params = {
     name: string;

@@ -2,8 +2,8 @@ import { type NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import { useState } from "react";
-import { _Region } from "~/server/constants/regions";
-import { formatWhiteSpacesToUrl } from "~/server/utils/formatWhiteSpace";
+import { _Region } from "~/constants/regions";
+import { formatWhiteSpacesToUrl } from "~/utils/formatWhiteSpace";
 import { api } from "~/utils/api";
 import { Strategy } from "~/utils/tabnews";
 

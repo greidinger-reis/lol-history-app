@@ -1,10 +1,10 @@
 // @ts-check
 import fsExtra from "fs-extra";
-import { getItemsInfo } from "./src/server/utils/items/getItemsInfo.mjs";
-import { getChampionInfo } from "./src/server/utils/champions/getChampionInfo.mjs";
-import { getQueueDict } from "./src/server/utils/queues/getQueueIds.mjs";
-import { getRunePages } from "./src/server/utils/runes/getRunes.mjs";
-import { getSummonerSpells } from "./src/server/utils/summoner-spells/getSummonerSpells.mjs";
+import { getItemsInfo } from "./src/utils/items/getItemsInfo.mjs";
+import { getChampionInfo } from "./src/utils/champions/getChampionInfo.mjs";
+import { getQueueDict } from "./src/utils/queues/getQueueIds.mjs";
+import { getRunePages } from "./src/utils/runes/getRunes.mjs";
+import { getSummonerSpells } from "./src/utils/summoner-spells/getSummonerSpells.mjs";
 
 /**
  * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation.

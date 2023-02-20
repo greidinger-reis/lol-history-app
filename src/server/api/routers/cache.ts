@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { del } from "~/server/cache";
+import { del } from "~/server/services/cache";
 import { createTRPCRouter, publicProcedure } from "../trpc";
 
 export const cacheRouter = createTRPCRouter({

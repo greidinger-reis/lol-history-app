@@ -1,7 +1,7 @@
-import type { MatchesRegion } from "../constants/regions";
-import { summonerMatchesIdsSchema } from "../types/matchesIds";
-import { fetchSummonerMatchesIds } from "../fetches/matchesIds";
-import { fetchMatchById } from "../fetches/matchById";
+import type { MatchesRegion } from "~/constants/regions";
+import { summonerMatchesIdsSchema } from "~/server/types/matchesIds";
+import { fetchSummonerMatchesIds } from "~/server/fetches/matchesIds";
+import { fetchMatchById } from "~/server/fetches/matchById";
 import type { Match } from "~/models/Match";
 import { parseMatch } from "./parseMatch";
 
@@ -47,7 +47,11 @@ export async function getSummonerMatches({
     start: number;
     count: number;
 }) {
-    const matchIds = 
-        await getSummonerMatchesIds({ puuid, region, count, start })
-    return Promise.all(matchIds.map((id) => getMatchInfoById({ id, region })))
+    const matchIds = await getSummonerMatchesIds({
+        puuid,
+        region,
+        count,
+        start,
+    });
+    return Promise.all(matchIds.map((id) => getMatchInfoById({ id, region })));
 }

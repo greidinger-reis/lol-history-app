@@ -1,9 +1,9 @@
 import { z } from "zod";
 import { createTRPCRouter, publicProcedure } from "../trpc";
-import { type Region, _Region } from "~/server/constants/regions";
-import { getSummonerSeasonInfo } from "~/server/season";
+import { type Region, _Region } from "~/constants/regions";
+import { getSummonerSeasonInfo } from "~/server/services/season";
 import { TRPCError } from "@trpc/server";
-import { fetchCached } from "~/server/cache";
+import { fetchCached } from "~/server/services/cache";
 
 const TIME_TO_LIVE = 1000 * 60 * 60 * 24 * 2;
 

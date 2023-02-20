@@ -1,5 +1,5 @@
 import { env } from "~/env.mjs";
-import type { MatchesRegion } from "../constants/regions";
+import type { MatchesRegion } from "~/constants/regions";
 
 export function fetchMatchById({
     id,

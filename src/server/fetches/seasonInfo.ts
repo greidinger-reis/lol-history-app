@@ -1,5 +1,5 @@
-import type { Region } from "../constants/regions";
-import { parseRegion } from "../utils/parseRegion";
+import type { Region } from "~/constants/regions";
+import { parseRegion } from "~/utils/parseRegion";
 import { env } from "~/env.mjs";
 
 type Params = {

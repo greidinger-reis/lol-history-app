@@ -1,10 +1,10 @@
 import { z } from "zod";
-import { getSummonerMatches } from "~/server/matches";
-import { MatchesRegion } from "~/server/constants/regions";
+import { getSummonerMatches } from "~/server/services/matches";
+import { MatchesRegion } from "~/constants/regions";
 import { createTRPCRouter, publicProcedure } from "../trpc";
-import { fetchCached, get, set } from "~/server/cache";
+import { fetchCached, get, set } from "~/server/services/cache";
 import { TRPCError } from "@trpc/server";
-import { TIME_TO_LIVE } from "~/server/constants/cache";
+import { TIME_TO_LIVE } from "~/constants/cache";
 
 export const matchesRouter = createTRPCRouter({
     listInfinite: publicProcedure
