@@ -1,5 +1,5 @@
 // @ts-check
-import fsExtra from "fs-extra";
+import fs from "node:fs"
 import { getItemsInfo } from "./src/utils/items/getItemsInfo.mjs";
 import { getChampionInfo } from "./src/utils/champions/getChampionInfo.mjs";
 import { getQueueDict } from "./src/utils/queues/getQueueIds.mjs";
@@ -41,20 +41,20 @@ const getConfig = async () => {
 
     Promise.all([runes, summonerSpells, queues, champions, items]).then(
         (values) => {
-            fsExtra.writeJson("./public/data/runes.json", values[0], {
-                spaces: 4,
+            fs.writeFileSync("./public/data/runes.json", JSON.stringify(values[0], null, 4), {
+                encoding: "utf8"
             });
-            fsExtra.writeJson("./public/data/summoner-spells.json", values[1], {
-                spaces: 4,
+            fs.writeFileSync("./public/data/summoner-spells.json", JSON.stringify(values[1], null, 4), {
+                encoding: "utf8"
             });
-            fsExtra.writeJson("./public/data/queues.json", values[2], {
-                spaces: 4,
+            fs.writeFileSync("./public/data/queues.json", JSON.stringify(values[2], null, 4), {
+                encoding: "utf8"
             });
-            fsExtra.writeJson("./public/data/champions.json", values[3], {
-                spaces: 4,
+            fs.writeFileSync("./public/data/champions.json", JSON.stringify(values[3], null, 4), {
+                encoding: "utf8"
             });
-            fsExtra.writeJson("./public/data/items.json", values[4], {
-                spaces: 4,
+            fs.writeFileSync("./public/data/items.json", JSON.stringify(values[4], null, 4), {
+                encoding: "utf8"
             });
         }
     );
